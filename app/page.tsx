@@ -34,7 +34,7 @@ export default function Home() {
         }}
       >
         <div className="relative z-10 flex-1 flex items-center">
-          <div className="container mx-auto px-4 md:px-20 max-w-full">
+          <div className="container mx-auto px-4 md:px-20 max-w-full mt-12 md:mt-22">
             <h1
               className="font-anton text-[40px] sm:text-[50px] md:text-[70px] lg:text-[90px] xl:text-[100px] leading-[1.08] font-normal text-[#EFF3CE] max-w-5xl break-words hyphens-auto"
               style={{
@@ -106,12 +106,14 @@ export default function Home() {
             </span>
           </h2>
 
-<div className="flex justify-center items-center w-full">
-  <hr className="border-0 h-[10px] w-[45%] bg-[#BFDD50] rounded-full m-6" />
-</div>
+          <div className="flex justify-center items-center w-full">
+            <hr className="border-0 h-[10px] w-[50%] bg-[#BFDD50] rounded-full m-6" />
+          </div>
 
           <p className="font-noto-condensed text-[40px] md:text-[45px] lg:text-[50px] leading-[0.98] font-normal text-[#005233] max-w-4xl mx-auto">
-            Unimos expertise para transformar<br/>negócios, da <span className="font-[800]">ideia ao mercado.</span>
+            Unimos expertise para transformar
+            <br />
+            negócios, da <span className="font-[800]">ideia ao mercado.</span>
           </p>
         </div>
       </section>

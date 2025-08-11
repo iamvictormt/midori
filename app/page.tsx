@@ -274,7 +274,7 @@ export default function Home() {
       {/* Values Section */}
       <section className="overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] min-h-[60vh]">
-          <div className="bg-[#EFF3CE] flex items-center px-4 md:px-20">
+          <div className="bg-[#EFF3CE] md:flex items-center px-4 md:px-20 pt-12 md:pt-0">
             <h2 className="font-anton text-[50px] sm:text-[60px] md:text-[70px] lg:text-[80px] xl:text-[100px] leading-[1.08] font-normal text-[#005233] text-center lg:text-left">
               NOSSOS
               <br />
@@ -332,13 +332,13 @@ export default function Home() {
       <section id="servicos" className="bg-[#EFF3CE] py-16 lg:py-20 overflow-hidden">
         <div className="container mx-auto px-4 md:px-20">
           <div className="text-center mb-16 max-w-6xl mx-auto">
-            <p className="font-noto-condensed text-[28px] sm:text-[32px] md:text-[38px] lg:text-[42px] xl:text-[45px] leading-[1.04] font-normal text-[#005233] mb-8 text-center max-w-4xl mx-auto break-words">
+            <p className="font-noto-condensed text-[28px] sm:text-[32px] md:text-[38px] lg:text-[42px] xl:text-[45px] leading-[1.04] font-normal text-[#005233] mb-2 md:mb-8 text-left max-w-4xl mx-auto break-words">
               Do <span className="font-bold">diagnóstico estratégico</span> ao
               <br className="hidden sm:block" />
               <span className="font-bold">lançamento de novos negócios,</span>
             </p>
 
-            <h2 className="font-anton text-[40px] sm:text-[50px] md:text-[70px] lg:text-[85px] xl:text-[100px] leading-[1.08] font-normal text-center mb-16 max-w-6xl mx-auto break-words">
+            <h2 className="font-anton text-[40px] sm:text-[50px] md:text-[70px] lg:text-[85px] xl:text-[100px] leading-[1.08] font-normal text-left mb-16 max-w-6xl mx-auto break-words">
               <span className="text-[#005233]">OFERECEMOS </span>
               <span className="text-[#7CA800]">
                 SOLUÇÕES
@@ -487,8 +487,8 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-20 max-w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 max-w-7xl mx-auto">
             {/* Left Column */}
-            <div className="space-y-6 lg:space-y-8">
-              <h2 className="font-anton text-[35px] sm:text-[45px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[1.12] font-normal text-[#EFF3CE] max-w-2xl break-words">
+            <div className="space-y-6 lg:space-y-8 text-center md:text-left">
+              <h2 className="font-anton text-[35px] sm:text-[45px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[1.12] font-normal text-[#EFF3CE] max-w-2xl break-words ">
                 COMO PODEMOS
                 <br />
                 COLABORAR COM A <br />
@@ -502,7 +502,7 @@ export default function Home() {
                 <span className="text-[#BFDD50] font-bold">Vamos começar?</span>
               </p>
 
-              <div className="flex items-center space-x-2">
+              <div className="inline-flex md:flex items-center space-x-2">
                 <Image
                   src="/logo.svg"
                   alt="Midori coLAB Logo"

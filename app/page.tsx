@@ -28,7 +28,7 @@ export default function Home() {
       <section
         className="relative h-[70vh] md:h-[80vh] lg:h-[90vh] flex flex-col justify-between bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{
-          backgroundImage: "url('/floresta-bg.png')",
+          backgroundImage: "url('/floresta-bg.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
         }}
@@ -96,7 +96,7 @@ export default function Home() {
       {/* About Introduction */}
       <section className="bg-[#A9CE42] py-16 lg:py-24">
         <div className="container mx-auto px-4 md:px-20 max-w-full text-center">
-          <h2 className="font-anton text-[50px] md:text-[80px] lg:text-[100px] leading-[1.08] font-normal text-[#005233] mb-8">
+          <h2 className="font-anton text-[50px] md:text-[80px] lg:text-[100px] leading-[1.08] font-normal text-[#005233]">
             SOMOS UM COLETIVO DE <br />
             PROFISSIONAIS APAIXONADOS <br />
             POR{' '}
@@ -106,8 +106,12 @@ export default function Home() {
             </span>
           </h2>
 
+<div className="flex justify-center items-center w-full">
+  <hr className="border-0 h-[10px] w-[45%] bg-[#BFDD50] rounded-full m-6" />
+</div>
+
           <p className="font-noto-condensed text-[40px] md:text-[45px] lg:text-[50px] leading-[0.98] font-normal text-[#005233] max-w-4xl mx-auto">
-            Unimos expertise para transformar negócios, da <span className="font-[800]">ideia ao mercado.</span>
+            Unimos expertise para transformar<br/>negócios, da <span className="font-[800]">ideia ao mercado.</span>
           </p>
         </div>
       </section>

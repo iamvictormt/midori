@@ -577,7 +577,10 @@ export default function Home() {
               </div>
 
               <div className="flex gap-4">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#EFF3CE] rounded-full flex items-center justify-center">
+                <div
+                  className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#EFF3CE] rounded-full flex items-center justify-center cursor-pointer
+                transition-shadow duration-300 hover:shadow-lg hover:brightness-110"
+                >
                   <Image
                     src="/linkedin-icon.png"
                     alt="LinkedIn"
@@ -586,7 +589,10 @@ export default function Home() {
                     className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
                   />
                 </div>
-                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#EFF3CE] rounded-full flex items-center justify-center">
+                <div
+                  className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#EFF3CE] rounded-full flex items-center justify-center cursor-pointer
+                transition-shadow duration-300 hover:shadow-lg hover:brightness-110"
+                >
                   <Image
                     src="/instagram-icon.svg"
                     alt="Instagram"

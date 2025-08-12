@@ -314,7 +314,7 @@ export default function Home() {
       {/* Values Section */}
       <section className="overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-[35%_65%] min-h-[60vh]">
-          <div className="bg-[#EFF3CE] md:flex items-center px-4 md:px-40 pt-12 md:pt-0">
+          <div className="bg-[#EFF3CE] md:flex items-center px-4 md:px-40 py-12 md:py-0">
             <h2 className="font-anton text-[50px] sm:text-[60px] md:text-[70px] lg:text-[80px] xl:text-[100px] leading-[1.08] font-normal text-[#005233] text-center lg:text-left">
               NOSSOS
               <br />

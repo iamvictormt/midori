@@ -206,7 +206,7 @@ export default function Home() {
                 </div>
               </div>
               {/* Segundo e terceiro prêmios - layout lado a lado */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
                 <div className="bg-[#EFF3CE] p-5 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
                   <div className="flex items-center space-x-4">
                     <div className="w-40 h-50 md:w-50 md:h-60 rounded-lg overflow-hidden shadow-md">

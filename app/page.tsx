@@ -171,7 +171,7 @@ export default function Home() {
       {/* Projetos Premiados Section */}
       <section className="bg-[#005233] py-16 lg:py-30 overflow-hidden">
         <div className="container mx-auto px-4 md:px-40 max-w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-[38%_minmax(0,62%)] gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[42%_minmax(0,58%)] gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
             <div>
               <h2 className="font-anton text-[50px] sm:text-[60px] md:text-[80px] lg:text-[100px] leading-[1.08] font-normal text-[#EFF3CE] break-words">
                 PROJETOS PREMIADOS
@@ -184,29 +184,27 @@ export default function Home() {
             </div>
 
             <div className="relative flex flex-col space-y-6">
-              {/* Primeiro prêmio - destaque principal */}
-              <div className="relative bg-[#EFF3CE] p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className="bg-[#005233] text-[#EFF3CE] px-4 py-2 rounded-full text-sm font-noto-condensed font-bold mb-3 inline-block">
-                      DESTAQUE 2024
-                    </div>
-                    <h3 className="font-anton text-[#005233] text-2xl mb-2">Award 2024</h3>
-                    <p className="font-noto-condensed text-[#005233] font-bold">2º Lugar</p>
-                  </div>
-                  <div className="w-40 h-40 md:w-64 md:h-60 rounded-xl overflow-hidden shadow-lg">
-                    <Image
-                      src="/premio1.png"
-                      alt="Prêmio Award 2024 - 2º Lugar"
-                      width={150}
-                      height={150}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
               {/* Segundo e terceiro prêmios - layout lado a lado */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
+                <div className="bg-[#EFF3CE] p-5 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 md:col-span-2 md:w-[50%] md:justify-self-center">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-40 h-50 md:w-50 md:h-60 rounded-lg overflow-hidden shadow-md">
+                      <Image
+                        src="/premio1.png"
+                        alt="Prêmio Award 2024 - 2º Lugar"
+                        width={150}
+                        height={150}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-anton text-[#005233] text-2xl mb-2">Award</h3>
+                      <p className="font-noto-condensed text-[#005233] font-bold">2º Lugar</p>
+                      <span className="text-[#7CA800] text-xs font-noto-condensed">2024</span>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="bg-[#EFF3CE] p-5 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
                   <div className="flex items-center space-x-4">
                     <div className="w-40 h-50 md:w-50 md:h-60 rounded-lg overflow-hidden shadow-md">
@@ -244,7 +242,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>{' '}
+              </div>
             </div>
           </div>
         </div>

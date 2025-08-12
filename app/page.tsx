@@ -485,7 +485,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-40">
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
             <div>
-              <h2 className="font-noto-condensed text-[40px] md:text-[45px] lg:text-[50px] leading-[0.7] font-normal text-[#005233] text-center md:text-left">
+              <h2 className="font-noto-condensed text-[40px] md:text-[45px] lg:text-[50px] leading-[0.9] font-normal text-[#005233] text-center md:text-left">
                 Vamos{' '}
                 <span className="font-bold">
                   coLABorar

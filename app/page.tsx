@@ -2,8 +2,18 @@
 
 import Header from '@/components/header';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    nome: '',
+    empresa: '',
+    mensagem: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [lastSubmitTime, setLastSubmitTime] = useState<number | null>(null);
+
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
@@ -19,6 +29,73 @@ export default function Home() {
       });
     }
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.nome.trim()) {
+      setSubmitMessage('Por favor, preencha seu nome.');
+      return;
+    }
+
+    if (!formData.empresa.trim()) {
+      setSubmitMessage('Por favor, preencha o nome da empresa.');
+      return;
+    }
+
+    if (!formData.mensagem.trim()) {
+      setSubmitMessage('Por favor, escreva uma mensagem.');
+      return;
+    }
+
+    const now = Date.now();
+    if (lastSubmitTime && now - lastSubmitTime < 1800000) {
+      const remainingTime = Math.ceil((1800000 - (now - lastSubmitTime)) / 60000);
+      setSubmitMessage(`Aguarde ${remainingTime} minutos antes de enviar outra mensagem.`);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitMessage('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+        setFormData({ nome: '', empresa: '', mensagem: '' });
+        setLastSubmitTime(now);
+        localStorage.setItem('lastSubmitTime', now.toString());
+      } else {
+        setSubmitMessage('Erro ao enviar mensagem. Tente novamente.');
+      }
+    } catch (error) {
+      setSubmitMessage('Erro ao enviar mensagem. Verifique sua conexão.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    const savedTime = localStorage.getItem('lastSubmitTime');
+    if (savedTime) {
+      setLastSubmitTime(Number.parseInt(savedTime));
+    }
+  }, []);
 
   return (
     <div className="overflow-x-hidden min-h-screen">
@@ -77,8 +154,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-40 max-w-full">
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-24">
             <p className="font-noto-condensed text-[20px] md:text-[28px] lg:text-[30px] leading-[1.17] font-normal text-[#005233]">
-              Transformamos ideias em resultados sustentáveis,
-              <br className="hidden md:inline" />
+              Transformamos ideias em resultados sustentáveis, <br className="hidden md:inline" />
               do conceito ao lançamento, da fazenda ao varejo.
             </p>
             <div className="flex-shrink-0">
@@ -537,43 +613,70 @@ export default function Home() {
 
             {/* Right Column - Form */}
             <div className="max-w-full">
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block font-noto-condensed text-[20px] sm:text-[24px] md:text-[26px] lg:text-[30px] leading-[1.17] font-bold text-[#EFF3CE] mb-3">
-                    Seu nome:
+                    Seu nome: *
                   </label>
                   <input
                     type="text"
+                    name="nome"
+                    value={formData.nome}
+                    onChange={handleInputChange}
                     className="w-full h-[70px] sm:h-[80px] md:h-[90px] lg:h-[98px] px-4 sm:px-6 rounded-[13px] bg-[#EFF3CE] border-none text-[#005233] font-noto-condensed text-[16px] sm:text-[18px] focus:outline-none focus:ring-2 focus:ring-[#BFDD50]"
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block font-noto-condensed text-[20px] sm:text-[24px] md:text-[26px] lg:text-[30px] leading-[1.17] font-bold text-[#EFF3CE] mb-3">
-                    Empresa:
+                    Empresa: *
                   </label>
                   <input
                     type="text"
+                    name="empresa"
+                    value={formData.empresa}
+                    onChange={handleInputChange}
                     className="w-full h-[70px] sm:h-[80px] md:h-[90px] lg:h-[98px] px-4 sm:px-6 rounded-[13px] bg-[#EFF3CE] border-none text-[#005233] font-noto-condensed text-[16px] sm:text-[18px] focus:outline-none focus:ring-2 focus:ring-[#BFDD50]"
+                    required
                   />
                 </div>
 
                 <div>
                   <label className="block font-noto-condensed text-[20px] sm:text-[24px] md:text-[26px] lg:text-[30px] leading-[1.17] font-bold text-[#EFF3CE] mb-3">
-                    Mensagem:
+                    Mensagem: *
                   </label>
                   <textarea
+                    name="mensagem"
+                    value={formData.mensagem}
+                    onChange={handleInputChange}
                     rows={4}
                     className="w-full px-4 sm:px-6 py-4 rounded-[13px] bg-[#EFF3CE] border-none text-[#005233] font-noto-condensed text-[16px] sm:text-[18px] focus:outline-none focus:ring-2 focus:ring-[#BFDD50] resize-none"
+                    required
                   ></textarea>
                 </div>
+
+                {submitMessage && (
+                  <div
+                    className={`text-center p-4 rounded-lg ${
+                      submitMessage.includes('sucesso') ? 'bg-[#7CA800] text-[#EFF3CE]' : 'bg-[#BFDD50] text-[#005233]'
+                    }`}
+                  >
+                    <p className="font-noto-condensed text-[16px] font-bold">{submitMessage}</p>
+                  </div>
+                )}
 
                 <div className="text-right">
                   <button
                     type="submit"
-                    className="bg-[#BFDD50] text-[#005233] font-noto-condensed font-extrabold text-[24px] sm:text-[28px] lg:text-[30px] px-8 sm:px-12 py-4 sm:py-6 rounded-[22px] hover:bg-[#A9CE42] transition-colors duration-300 w-full sm:w-auto cursor-pointer"
+                    disabled={isSubmitting}
+                    className={`font-noto-condensed font-extrabold text-[24px] sm:text-[28px] lg:text-[30px] px-8 sm:px-12 py-4 sm:py-6 rounded-[22px] transition-colors duration-300 w-full sm:w-auto ${
+                      isSubmitting
+                        ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                        : 'bg-[#BFDD50] text-[#005233] hover:bg-[#A9CE42] cursor-pointer'
+                    }`}
                   >
-                    ENVIAR
+                    {isSubmitting ? 'ENVIANDO...' : 'ENVIAR'}
                   </button>
                 </div>
               </form>
@@ -605,30 +708,35 @@ export default function Home() {
               </div>
 
               <div className="flex gap-4">
-                <div
-                  className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#EFF3CE] rounded-full flex items-center justify-center cursor-pointer
-                transition-shadow duration-300 hover:shadow-lg hover:brightness-110"
-                >
-                  <Image
-                    src="/linkedin-icon.png"
-                    alt="LinkedIn"
-                    width={24}
-                    height={24}
-                    className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
-                  />
-                </div>
-                <div
-                  className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#EFF3CE] rounded-full flex items-center justify-center cursor-pointer
-                transition-shadow duration-300 hover:shadow-lg hover:brightness-110"
-                >
-                  <Image
-                    src="/instagram-icon.svg"
-                    alt="Instagram"
-                    width={24}
-                    height={24}
-                    className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
-                  />
-                </div>
+                <a href="https://www.linkedin.com/company/midori-colab" target="_blank" rel="noopener noreferrer">
+                  <div
+                    className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#EFF3CE] rounded-full flex items-center justify-center cursor-pointer
+    transition-shadow duration-300 hover:shadow-lg hover:brightness-110"
+                  >
+                    <Image
+                      src="/linkedin-icon.png"
+                      alt="LinkedIn"
+                      width={24}
+                      height={24}
+                      className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
+                    />
+                  </div>
+                </a>
+
+                <a href="https://www.instagram.com/midori_colab" target="_blank" rel="noopener noreferrer">
+                  <div
+                    className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-[#EFF3CE] rounded-full flex items-center justify-center cursor-pointer
+    transition-shadow duration-300 hover:shadow-lg hover:brightness-110"
+                  >
+                    <Image
+                      src="/instagram-icon.svg"
+                      alt="Instagram"
+                      width={24}
+                      height={24}
+                      className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12"
+                    />
+                  </div>
+                </a>
               </div>
             </div>
           </div>
